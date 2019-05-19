@@ -1,0 +1,11 @@
+@mixin svg-common {
+	background: url("../images/sprite/sprite-961a92ca.svg") no-repeat;
+}
+
+@mixin svg-delete_me {
+	@include svg-common;
+	background-position: 0 0;
+	width: 28px;
+	height: 28px;
+}
+

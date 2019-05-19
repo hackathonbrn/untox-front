@@ -1,0 +1,51 @@
+.widget{
+    padding: 48px;
+    background: #F7F7F7;
+    border: 2px solid #000;
+    max-width: 800px;
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 1px);
+    &-close{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: #000;
+        background-image: url('/images/cross.svg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        z-index: 10;
+        cursor: pointer;
+    }
+    &-title{
+        font-size: 25px;
+        line-height: 28px;
+        text-transform: uppercase;
+        margin-bottom: 11px;
+    }   
+    &-description{
+        font-size: 15px;
+        line-height: 28px;
+        margin-bottom: 25px;
+    }
+    &-text{
+        padding: 16px 20px;
+        background: #fff;
+        margin-left: -24px;
+        margin-right: -24px;
+        margin-bottom: 24px;
+    }
+    &-controls{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-left: -24px;
+        margin-right: -24px;
+
+    }
+}

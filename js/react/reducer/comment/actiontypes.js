@@ -1,0 +1,2 @@
+export const SEND_COMMENT = 'SEND_COMMENT'
+export const SEND_COMMENT_LOAD = 'SEND_COMMENT_LOAD'

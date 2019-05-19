@@ -175,9 +175,9 @@ window.onload = function() {
                     if (item.toxicity < 0) {
                         text = text.replace(expr, '<b class="detect">' + item.word + '</b>')
                     } else {
-                        if (item.is_bad) {
+                        if (item.is_bad == 1) {
                             text = text.replace(expr, '<b class="detect detect-bad">' + item.word + '</b>')
-                        } else if (item.is_filthy) {
+                        } else if (item.is_filthy == 1) {
                             text = text.replace(expr, '<b class="detect detect-filthy">' + item.word + '</b>')
                         }
                     }
@@ -195,7 +195,7 @@ window.onload = function() {
             let fd = new FormData()
             fd.append('text', text)
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://ct35142.tmweb.ru/basic/web/site/check/', false);
+            xhr.open('POST', 'http://ct35142.tmweb.ru/basic/web/site/test/', false);
     
             xhr.send(fd)
     
@@ -208,9 +208,9 @@ window.onload = function() {
                     if (item.toxicity < 0) {
                         text = text.replace(expr, '<b class="detect">' + item.word + '</b>')
                     } else {
-                        if (item.is_bad) {
+                        if (item.is_bad == 1) {
                             text = text.replace(expr, '<b class="detect detect-bad">' + item.word + '</b>')
-                        } else if (item.is_filthy) {
+                        } else if (item.is_filthy == 1) {
                             text = text.replace(expr, '<b class="detect detect-filthy">' + item.word + '</b>')
                         }
                     }

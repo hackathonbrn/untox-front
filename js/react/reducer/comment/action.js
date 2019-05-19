@@ -19,9 +19,9 @@ export const sendComment = (data) => (dispatch) => {
                 if (item.toxicity < 0) {
                     text = text.replace(expr, '<b class="detect">' + item.word + '</b>')
                 } else {
-                    if (item.is_bad) {
+                    if (item.is_bad == 1) {
                         text = text.replace(expr, '<b class="detect detect-bad">' + item.word + '</b>')
-                    } else if (item.is_filthy) {
+                    } else if (item.is_filthy == 1) {
                         text = text.replace(expr, '<b class="detect detect-filthy">' + item.word + '</b>')
                     }
                 }

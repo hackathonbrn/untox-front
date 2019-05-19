@@ -123,6 +123,12 @@ window.onload = function() {
             #widgettox .detect{
                 color:red;
             }
+            #widgettox .detect-bad{
+                color: #ffb100;
+            }
+            #widgettox .detect-filthy{
+                color: #e8e810;
+            }
         </style>
 
     <div id="widgettox">

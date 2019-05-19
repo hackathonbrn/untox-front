@@ -49,13 +49,14 @@
 }
 .detect{
     color: red;
-    .detect-bad{
-        color: orange;
-    }
-    .detect-filthy{
-        color: yellow;
-    }
 }
+.detect-bad{
+    color: #ffb100;
+}
+.detect-filthy{
+    color: #e8e810;
+}
+
 .loading{
     position: absolute;
     left: 50%;

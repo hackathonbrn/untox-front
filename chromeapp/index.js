@@ -162,7 +162,7 @@ window.onload = function() {
             fd.append('text', text)
             var xhr = new XMLHttpRequest();
 
-            xhr.open('POST', 'http://ct35142.tmweb.ru/basic/web/site/check/', false);
+            xhr.open('POST', 'http://ct35142.tmweb.ru/basic/web/site/test/', false);
     
             xhr.send(fd)
     

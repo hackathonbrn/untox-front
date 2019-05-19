@@ -166,10 +166,18 @@ window.onload = function() {
                 let res = JSON.parse(xhr.responseText)
                 res.wordToxicity.map((item, i) => {
                     var expr = new RegExp(item.word, 'gi');
-                    text = text.replace(expr, '<b class="detect">' + item.word + '</b>')            
+                    if (item.toxicity < 0) {
+                        text = text.replace(expr, '<b class="detect">' + item.word + '</b>')
+                    } else {
+                        if (item.is_bad) {
+                            text = text.replace(expr, '<b class="detect detect-bad">' + item.word + '</b>')
+                        } else if (item.is_filthy) {
+                            text = text.replace(expr, '<b class="detect detect-filthy">' + item.word + '</b>')
+                        }
+                    }
                 })
 
-                let level = (res.commToxicity / res.wordToxicity.length).toFixed()
+                let level = res.wordToxicity.length > 0 ? (res.commToxicity / res.wordToxicity.length).toFixed() : 0
                 document.querySelector('#js-toxic-level').innerHTML = level
 
                 document.querySelector('#widgettox-text').innerHTML = text
@@ -191,10 +199,18 @@ window.onload = function() {
                 let res = JSON.parse(xhr.responseText)
                 res.wordToxicity.map((item, i) => {
                     var expr = new RegExp(item.word, 'gi');
-                    text = text.replace(expr, '<b class="detect">' + item.word + '</b>')            
+                    if (item.toxicity < 0) {
+                        text = text.replace(expr, '<b class="detect">' + item.word + '</b>')
+                    } else {
+                        if (item.is_bad) {
+                            text = text.replace(expr, '<b class="detect detect-bad">' + item.word + '</b>')
+                        } else if (item.is_filthy) {
+                            text = text.replace(expr, '<b class="detect detect-filthy">' + item.word + '</b>')
+                        }
+                    }
                 })
                 
-                let level = (res.commToxicity / res.wordToxicity.length).toFixed()
+                let level = res.wordToxicity.length > 0 ? (res.commToxicity / res.wordToxicity.length).toFixed() : 0
                 document.querySelector('#js-toxic-level').innerHTML = level
                 document.querySelector('#widgettox-text').innerHTML = text
 

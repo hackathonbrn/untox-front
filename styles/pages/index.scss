@@ -48,7 +48,13 @@
     }
 }
 .detect{
-    color: red
+    color: red;
+    .detect-bad{
+        color: orange;
+    }
+    .detect-filthy{
+        color: yellow;
+    }
 }
 .loading{
     position: absolute;

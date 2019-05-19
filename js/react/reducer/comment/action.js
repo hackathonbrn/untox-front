@@ -19,9 +19,11 @@ export const sendComment = (data) => (dispatch) => {
                 text = text.replace(expr, '<b class="detect">' + item.word + '</b>')            
             })
             
+            let level = (res.commToxicity / res.wordToxicity.length).toFixed()
+
             dispatch({
                 type   : SEND_COMMENT,
-                payload: { loading: false, level: 0, data: text }
+                payload: { loading: false, level: level, data: text }
             });
         },
         error: () => {

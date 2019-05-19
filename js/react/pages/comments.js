@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Popup from '../components/popup'
 import { sendComment } from '../reducer/comment/action'
-
+import Loading from '../components/loader'
 class Comments extends Component {
     constructor() {
         super();
@@ -33,6 +33,7 @@ class Comments extends Component {
     render() {
         return (
             <div className='comments'>
+                {this.props.commentStatus.loading ? <Loading/> : ''}
                 <div className='comments-field'>
                     <textarea onChange={this.handleChange} value={this.state.value}></textarea>
                     <div className='comments-field__btns'>

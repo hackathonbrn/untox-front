@@ -15,8 +15,8 @@ export default class App extends Component {
                     <Link to="/comments/">Comments</Link>
                 </div>
                 <div>
-                    <Route exact path="/comments/" component={Home} />
-                    <Route exact path="/" component={Comments} />
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/comments" component={Comments} />
                 </div>
             </Router>
         );

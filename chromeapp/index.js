@@ -1,25 +1,24 @@
 
-window.onload = function(){
+window.onload = function() {
     console.log('test')
     
     let imageIcon = chrome.runtime.getURL("images/cross.svg")
     
     let icon
 
-    document.querySelectorAll('textarea').forEach(function(item){
-        
+    document.querySelectorAll('textarea').forEach(function(item) {
         item.parentNode.style = 'position:relative;'
         icon = document.createElement('div')
         icon.setAttribute('id', 'untoxicon')
         item.parentNode.appendChild(icon)
-        item.addEventListener('keyup', function(e){
-            if(this.value !== ''){
+        item.addEventListener('keyup', function(e) {
+            if (this.value !== '') {
                 this.parentNode.querySelector('#untoxicon').className = 'show'
-            }else{
+            } else {
                 this.parentNode.querySelector('#untoxicon').className = ''
             }
         })
-        if(item.value !== ''){
+        if (item.value !== '') {
             item.parentNode.querySelector('#untoxicon').className = 'show'
         }
     })
@@ -37,6 +36,7 @@ window.onload = function(){
             background: #F7F7F7;
             border: 2px solid #000;
             max-width: 800px;
+            width:100%;
             z-index: 10;
             position: fixed;
             top:50%;
@@ -75,6 +75,7 @@ window.onload = function(){
             .widget-controls {
             display: flex;
             flex-wrap: wrap;
+            align-items:center;
             justify-content: space-between;
             margin-left: -24px;
             margin-right: -24px; }
@@ -119,16 +120,20 @@ window.onload = function(){
             padding: 15px 22px; }
             #widgettox .btn--widget:after {
                 transform: translate(-5px, 5px); }
+            #widgettox .detect{
+                color:red;
+            }
         </style>
 
     <div id="widgettox">
         
         <div id="widget-close"> </div>
-        <div class="widget-title">!! Сообщение токсично !!</div>
-        <div class="widget-description">Рекомендуем дважды подумать, прежде чем такое писать. Корректируй, сука!</div>
-        <div id="widgettox-text" contenteditable="true" class="widget-text">Сижу давно на www.artstation.com Наконец то и эти пидоры проснулись и подумали о дизайне и удобстве. Ещё надеюсь отделять любительский арт, от профессионального, из-за первого выглядит сумбурно всё, явно есть работы начинающих - чтоб их, но я бы хотел разделения и фильтры.</div>
+        <div class="widget-title">!! Проверка токсичности !!</div>
+        
+        <div id="widgettox-text" contenteditable="true" class="widget-text"></div>
         <div class="widget-controls">
         <div class="btn btn--widget" id="js-check-tox">Перепроверить</div>
+        <div id="js-toxic-level"></div>
         <div class="btn btn--widget" id="js-tox-send">Отправить</div>
         </div>
     </div>
@@ -136,14 +141,13 @@ window.onload = function(){
     document.querySelector('body').appendChild(container)
 
 
-    document.querySelector('#widget-close').addEventListener('click', function(){
+    document.querySelector('#widget-close').addEventListener('click', function() {
         document.querySelector('#widgettox').className = ''
     })
 
     let area 
-    document.querySelector('body').addEventListener('click', function(e){
-        
-        if(e.target.getAttribute('id') == 'untoxicon'){    
+    document.querySelector('body').addEventListener('click', function(e) {
+        if (e.target.getAttribute('id') == 'untoxicon') {    
             document.querySelector('#widgettox').className = 'show'
             let item = e.currentTarget.parentNode.querySelector('textarea')
             area = item  
@@ -157,7 +161,7 @@ window.onload = function(){
             xhr.send(fd)
     
             if (xhr.status != 200) {
-               
+                console.log('error')
             } else {
                 let res = JSON.parse(xhr.responseText)
                 res.wordToxicity.map((item, i) => {
@@ -165,12 +169,14 @@ window.onload = function(){
                     text = text.replace(expr, '<b class="detect">' + item.word + '</b>')            
                 })
 
+                let level = (res.commToxicity / res.wordToxicity.length).toFixed()
+                document.querySelector('#js-toxic-level').innerHTML = level
+
                 document.querySelector('#widgettox-text').innerHTML = text
             }
         }
 
-        if(e.target.getAttribute('id') == 'js-check-tox'){
-
+        if (e.target.getAttribute('id') == 'js-check-tox') {
             let text = document.querySelector('#widgettox-text').textContent
             let fd = new FormData()
             fd.append('text', text)
@@ -180,29 +186,26 @@ window.onload = function(){
             xhr.send(fd)
     
             if (xhr.status != 200) {
-               
+                console.log('error')
             } else {
                 let res = JSON.parse(xhr.responseText)
                 res.wordToxicity.map((item, i) => {
                     var expr = new RegExp(item.word, 'gi');
                     text = text.replace(expr, '<b class="detect">' + item.word + '</b>')            
                 })
-
+                
+                let level = (res.commToxicity / res.wordToxicity.length).toFixed()
+                document.querySelector('#js-toxic-level').innerHTML = level
                 document.querySelector('#widgettox-text').innerHTML = text
 
                 console.log('___ loaded ___')
             }
         }
 
-        if(e.target.getAttribute('id') == 'js-tox-send'){
+        if (e.target.getAttribute('id') == 'js-tox-send') {
             area.value = this.querySelector('#widgettox-text ').textContent
             document.querySelector('#widgettox').className = ''
         }
-
-        
-        
-
-
         /*$.ajax({
             url: 'http://192.168.1.41:4000/test',
             data: {text: item.value},
@@ -216,7 +219,4 @@ window.onload = function(){
             }
         })*/
     })
-
-    
-   
 }

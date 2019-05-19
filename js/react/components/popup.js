@@ -31,6 +31,7 @@ class Popup extends Component {
                 <div className='widget-text' contentEditable={true} onInput={this.handleChange} dangerouslySetInnerHTML={{__html: this.props.commentStatus.data.length !== 0 ? this.props.commentStatus.data : ''}}/>
                 <div className='widget-controls'>
                     <div className='btn btn--widget' onClick={this.check}>Перепроверить</div>
+                    <div class='widget-controls-rating'>{this.props.commentStatus.level}</div>
                     <div className='btn btn--widget'>Отправить</div>
                 </div>
             </div>

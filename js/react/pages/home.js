@@ -23,9 +23,10 @@ class Home extends Component {
     }
 
     render() {
+         
         return (
             <div className='editor'>
-                {this.props.commentStatus.loading ? <Loading/> : '' }
+                {this.props.commentStatus.loading ? <Loading/> : ''}
                 <div className='editor-wrapper'>
                     <div className='editor-box__content'>
                         <div className='editor-box__content-item editor-box__content-item--center'>
@@ -42,7 +43,7 @@ class Home extends Component {
                             <div className='btn' onClick={this.send}>Отправить</div>
                         </div>
                         <div className='editor-box__control-item'>
-                            70%
+                            {this.props.commentStatus.level}
                         </div>
                     </div>
                 </div>
